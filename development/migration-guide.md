@@ -40,8 +40,8 @@ omegaUp is migrating from Smarty templates to modern Vue.js components with Type
 ```vue
 <template>
   <div class="problem">
-    <h1>{{ problem.title }}</h1>
-    <p>{{ problem.description }}</p>
+    <h1>{% raw %}{{ problem.title }}{% endraw %}</h1>
+    <p>{% raw %}{{ problem.description }}{% endraw %}</p>
   </div>
 </template>
 

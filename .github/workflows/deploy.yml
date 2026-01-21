@@ -74,8 +74,10 @@ jobs:
           zensical build
           
           # Ensure .nojekyll exists for GitHub Pages (prevents Jekyll processing)
+          # Create in both root and site directory
+          touch .nojekyll
           touch site/.nojekyll
-          echo "✓ Created .nojekyll file"
+          echo "✓ Created .nojekyll files"
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

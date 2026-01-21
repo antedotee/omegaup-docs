@@ -16,7 +16,7 @@ Components are located in `frontend/www/js/omegaup/components/`.
 ```vue
 <template>
   <div class="my-component">
-    <h1>{{ title }}</h1>
+    <h1>{% raw %}{{ title }}{% endraw %}</h1>
     <button @click="handleClick">Click me</button>
   </div>
 </template>
@@ -59,7 +59,7 @@ Never hardcode text. Always use translation strings:
 <div>Hello World</div>
 
 // ✅ Good
-<div>{{ T.helloWorld }}</div>
+<div>{% raw %}{{ T.helloWorld }}{% endraw %}</div>
 ```
 
 ### Avoid String Concatenation
@@ -67,10 +67,10 @@ Use `ui.formatString()` for parameterized strings:
 
 ```typescript
 // ❌ Bad
-{{ T.greeting }} {{ userName }}
+{% raw %}{{ T.greeting }}{% endraw %} {% raw %}{{ userName }}{% endraw %}
 
 // ✅ Good
-{{ ui.formatString(T.greeting, { name: userName }) }}
+{% raw %}{{ ui.formatString(T.greeting, { name: userName }) }}{% endraw %}
 ```
 
 ### Colors

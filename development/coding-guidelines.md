@@ -154,10 +154,10 @@ Never hardcode text. Always use translation strings:
 
 ```typescript
 // ❌ Bad: Hardcoded text
-<div>Contest ranking: {{ user.rank }}</div>
+<div>Contest ranking: {% raw %}{{ user.rank }}{% endraw %}</div>
 
 // ✅ Good: Translation string
-<div>{{ T.contestRanking }}</div>
+<div>{% raw %}{{ T.contestRanking }}{% endraw %}</div>
 ```
 
 !!! tip "String Formatting"

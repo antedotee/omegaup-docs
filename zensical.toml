@@ -1,0 +1,71 @@
+[project]
+site_name = "omegaUp Documentation"
+# Update this URL after creating your GitHub repository
+# Format: https://YOUR_USERNAME.github.io/YOUR_REPO_NAME
+# Or use your custom domain: https://docs.omegaup.com
+site_url = "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME"
+site_dir = "site"
+copyright = "Copyright &copy; 2025 omegaUp"
+docs_dir = "."
+
+[theme]
+name = "material"
+palette.primary = "blue"
+palette.accent = "blue"
+palette.scheme = "default"
+favicon = "assets/images/favicon.png"
+logo = "assets/images/omegaup.svg"
+
+[theme.features]
+navigation.tabs = true
+navigation.sections = true
+navigation.expand = true
+navigation.top = true
+search.suggest = true
+search.highlight = true
+content.code.copy = true
+content.code.annotate = true
+
+[markdown]
+extensions = [
+    "admonition",
+    "attr_list",
+    "def_list",
+    "footnotes",
+    "md_in_html",
+    "tables",
+    "pymdownx.arithmatex",
+    "pymdownx.betterem",
+    "pymdownx.caret",
+    "pymdownx.details",
+    "pymdownx.emoji",
+    "pymdownx.highlight",
+    "pymdownx.inlinehilite",
+    "pymdownx.keys",
+    "pymdownx.magiclink",
+    "pymdownx.mark",
+    "pymdownx.smartsymbols",
+    "pymdownx.superfences",
+    "pymdownx.tasklist",
+    "pymdownx.tilde",
+    "pymdownx.mermaid",
+]
+
+[plugins]
+search.enabled = true
+
+# Navigation will be auto-detected from directory structure
+# For explicit navigation, uncomment and configure below:
+# nav = [
+#   { Home = "index.md" },
+#   { "Getting Started" = [
+#       "getting-started/index.md",
+#       "getting-started/development-setup.md",
+#       "getting-started/contributing.md",
+#       "getting-started/getting-help.md"
+#     ]
+#   }
+# ]
+
+[extra]
+version = "1.0.0"

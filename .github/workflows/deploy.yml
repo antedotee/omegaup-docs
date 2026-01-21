@@ -32,8 +32,50 @@ jobs:
           pip install zensical
 
       - name: Build site
+        env:
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+          GITHUB_REPOSITORY_NAME: ${{ github.event.repository.name }}
         run: |
+          # Dynamically set site_url based on GitHub repository
+          # For project pages: https://username.github.io/repo-name/
+          # For user/org pages: https://username.github.io/
+          python3 << 'EOF'
+          import re
+          import os
+          
+          owner = os.environ.get('GITHUB_REPOSITORY_OWNER', '')
+          repo_name = os.environ.get('GITHUB_REPOSITORY_NAME', '')
+          
+          # Determine if this is a user/org page or project page
+          # If repo name matches owner name, it's a user page (root)
+          # Otherwise, it's a project page (subdirectory)
+          if repo_name.lower() == owner.lower():
+              site_url = f"https://{owner}.github.io/"
+          else:
+              site_url = f"https://{owner}.github.io/{repo_name}/"
+          
+          # Read zensical.toml
+          with open('zensical.toml', 'r') as f:
+              content = f.read()
+          
+          # Replace site_url line (handles both quoted formats)
+          pattern = r'site_url\s*=\s*["\']([^"\']*)["\']'
+          replacement = f'site_url = "{site_url}"'
+          content = re.sub(pattern, replacement, content)
+          
+          # Write back
+          with open('zensical.toml', 'w') as f:
+              f.write(content)
+          
+          print(f"✓ Updated site_url to: {site_url}")
+          EOF
+          
+          # Build the site
           zensical build
+          
+          # Ensure .nojekyll exists for GitHub Pages (prevents Jekyll processing)
+          touch site/.nojekyll
+          echo "✓ Created .nojekyll file"
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

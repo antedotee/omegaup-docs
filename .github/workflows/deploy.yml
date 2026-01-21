@@ -19,8 +19,112 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: 3.x
-      - run: pip install zensical
-      - run: zensical build --clean
+      - name: Install Zensical
+        run: pip install zensical
+      - name: Configure for GitHub Pages
+        env:
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+          GITHUB_REPOSITORY_NAME: ${{ github.event.repository.name }}
+        run: |
+          python3 << 'EOF'
+          import re
+          import os
+          
+          owner = os.environ.get('GITHUB_REPOSITORY_OWNER', '')
+          repo_name = os.environ.get('GITHUB_REPOSITORY_NAME', '')
+          
+          # Determine site_url for GitHub Pages
+          if repo_name.lower() == owner.lower():
+              site_url = f"https://{owner}.github.io/"
+          else:
+              site_url = f"https://{owner}.github.io/{repo_name}/"
+          
+          # Read and update zensical.toml
+          with open('zensical.toml', 'r') as f:
+              content = f.read()
+          
+          # Update site_url
+          pattern = r'site_url\s*=\s*["\'][^"\']*["\']'
+          content = re.sub(pattern, f'site_url = "{site_url}"', content)
+          
+          # Ensure use_directory_urls is set
+          if 'use_directory_urls' not in content:
+              content = re.sub(
+                  r'(site_url\s*=\s*"[^"]*")',
+                  r'\1\nuse_directory_urls = true',
+                  content,
+                  count=1
+              )
+          
+          with open('zensical.toml', 'w') as f:
+              f.write(content)
+          
+          print(f"✓ Configured site_url: {site_url}")
+          EOF
+      - name: Build site
+        run: zensical build --clean
+      - name: Fix asset paths for GitHub Pages
+        env:
+          GITHUB_REPOSITORY_NAME: ${{ github.event.repository.name }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+        run: |
+          python3 << 'FIXPATHS'
+          import os
+          import re
+          
+          repo_name = os.environ.get('GITHUB_REPOSITORY_NAME', '')
+          owner = os.environ.get('GITHUB_REPOSITORY_OWNER', '')
+          
+          # Determine base path
+          if repo_name.lower() == owner.lower():
+              base_path = ""
+          else:
+              base_path = f"/{repo_name}"
+          
+          # Find all HTML files
+          html_files = []
+          for root, dirs, files in os.walk('site'):
+              for file in files:
+                  if file.endswith('.html'):
+                      html_files.append(os.path.join(root, file))
+          
+          print(f"Processing {len(html_files)} HTML files")
+          print(f"Base path: {base_path or '/'}")
+          
+          files_modified = 0
+          for html_file in html_files:
+              with open(html_file, 'r', encoding='utf-8') as f:
+                  content = f.read()
+              
+              original = content
+              
+              # Fix CSS/JS asset paths: convert relative to absolute with base path
+              if base_path:
+                  # Fix href="assets/..." -> href="/repo/assets/..."
+                  content = re.sub(
+                      r'href=(["\'])(?!/|https?://|//)(assets/[^"\']+)',
+                      lambda m: f'href={m.group(1)}{base_path}/{m.group(2)}{m.group(1)}',
+                      content
+                  )
+                  # Fix src="assets/..." -> src="/repo/assets/..."
+                  content = re.sub(
+                      r'src=(["\'])(?!/|https?://|//)(assets/[^"\']+)',
+                      lambda m: f'src={m.group(1)}{base_path}/{m.group(2)}{m.group(1)}',
+                      content
+                  )
+              
+              if content != original:
+                  with open(html_file, 'w', encoding='utf-8') as f:
+                      f.write(content)
+                  files_modified += 1
+          
+          print(f"✓ Fixed asset paths in {files_modified} files")
+          
+          # Add .nojekyll to site directory
+          with open('site/.nojekyll', 'w') as f:
+              f.write('')
+          print("✓ Created .nojekyll")
+          FIXPATHS
       - uses: actions/upload-pages-artifact@v4
         with:
           path: site

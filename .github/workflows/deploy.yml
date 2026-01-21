@@ -59,10 +59,21 @@ jobs:
           with open('zensical.toml', 'r') as f:
               content = f.read()
           
-          # Replace site_url line (handles both quoted formats)
-          pattern = r'site_url\s*=\s*["\']([^"\']*)["\']'
-          replacement = f'site_url = "{site_url}"'
-          content = re.sub(pattern, replacement, content)
+          # Replace site_url line (handles both quoted formats and comments)
+          # Match: site_url = "..." or site_url = '...' or # site_url = "..."
+          pattern = r'(^|\n)(\s*#?\s*)site_url\s*=\s*["\'][^"\']*["\']'
+          replacement = f'\\1\\2site_url = "{site_url}"'
+          content = re.sub(pattern, replacement, content, flags=re.MULTILINE)
+          
+          # If no match found, add it after site_name
+          if f'site_url = "{site_url}"' not in content:
+              print("WARNING: site_url pattern didn't match, adding manually...")
+              content = re.sub(
+                  r'(site_name\s*=\s*"[^"]*")',
+                  f'\\1\nsite_url = "{site_url}"',
+                  content,
+                  count=1
+              )
           
           # Ensure use_directory_urls is set to true (default, but explicit is better)
           if 'use_directory_urls' not in content:
@@ -81,12 +92,23 @@ jobs:
           print(f"✓ Updated site_url to: {site_url}")
           print(f"✓ Configuration updated for GitHub Pages")
           
+          # Verify the update worked
+          with open('zensical.toml', 'r') as f:
+              verify_content = f.read()
+              if site_url in verify_content:
+                  print(f"✓ Verified: site_url is correctly set in zensical.toml")
+              else:
+                  print(f"✗ ERROR: site_url was not set correctly!")
+                  print(f"Expected: {site_url}")
+                  print("Actual config:")
+                  print(verify_content[:1000])
+          
           # Show the updated config for debugging
           print("\n=== Updated zensical.toml (project section) ===")
           import re as re2
-          project_section = re2.search(r'\[project\](.*?)(?=\n\[|\Z)', content, re2.DOTALL)
+          project_section = re2.search(r'\[project\](.*?)(?=\n\[|\Z)', verify_content, re2.DOTALL)
           if project_section:
-              print(project_section.group(0)[:500])
+              print(project_section.group(0)[:800])
           EOF
           
           # Build the site with --clean flag (as per Zensical docs)
@@ -100,12 +122,38 @@ jobs:
           echo "✓ Created .nojekyll files"
           
           # Verify build output and asset paths for debugging
-          echo "Verifying build output..."
+          echo "=== Build Output Verification ==="
+          echo "Checking site directory structure..."
+          ls -la site/ | head -15
+          echo ""
+          
           if [ -f site/index.html ]; then
-              echo "=== Sample CSS paths from index.html ==="
-              grep -o 'href="[^"]*\.css[^"]*"' site/index.html | head -5 || echo "No CSS links found"
-              echo "=== Sample JS paths from index.html ==="
-              grep -o 'src="[^"]*\.js[^"]*"' site/index.html | head -5 || echo "No JS links found"
+              echo "=== HTML Head Section (showing base, CSS, and JS) ==="
+              grep -A 30 "<head>" site/index.html | head -40
+              echo ""
+              
+              echo "=== All CSS links from index.html ==="
+              grep -o 'href="[^"]*\.css[^"]*"' site/index.html || echo "No CSS links found"
+              echo ""
+              
+              echo "=== All JS links from index.html ==="
+              grep -o 'src="[^"]*\.js[^"]*"' site/index.html || echo "No JS links found"
+              echo ""
+              
+              echo "=== Checking for base tag ==="
+              grep -i '<base' site/index.html || echo "No base tag found"
+              echo ""
+              
+              echo "=== Checking assets directory ==="
+              if [ -d site/assets ]; then
+                  echo "Assets directory exists:"
+                  find site/assets -type f -name "*.css" | head -10
+                  find site/assets -type f -name "*.js" | head -10
+              else
+                  echo "WARNING: site/assets directory not found!"
+              fi
+          else
+              echo "ERROR: site/index.html not found!"
           fi
 
       - name: Setup Pages

@@ -4,8 +4,6 @@ description: Understanding omegaUp's system architecture and design patterns
 icon: bootstrap/sitemap
 ---
 
-![omegaUp Architecture](assets/images/omegaup_curves.svg){ width="300" }
-
 # Architecture Overview
 
 omegaUp is built using the **Model-View-Controller (MVC)** architectural pattern, providing a clean separation of concerns between data, business logic, and presentation.

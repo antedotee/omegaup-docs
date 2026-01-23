@@ -4,8 +4,6 @@ description: Start your journey contributing to omegaUp
 icon: bootstrap/rocket-launch
 ---
 
-![omegaUp Logo](assets/images/omegaup.png){ width="200" style="max-width: 100%; height: auto; object-fit: contain;" }
-
 # Getting Started with omegaUp Development
 
 Welcome! This guide will help you get started with contributing to omegaUp, a free educational platform that helps improve programming skills.

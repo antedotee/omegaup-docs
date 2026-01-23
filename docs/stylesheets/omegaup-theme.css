@@ -86,15 +86,14 @@
 
 /* Hide site name from navbar - only show logo */
 .md-header__title {
-  display: none !important;
+  /* Keep this element as a flex spacer so header items stay right-aligned */
+  flex: 1 1 auto;
 }
 
-.md-header__topic {
+/* Hide the actual title text (site name + page title) */
+.md-header__title .md-header__ellipsis {
   display: none !important;
 }
 
 /* Move search bar to the right side of header */
-/* Material theme already uses flexbox, so we just need to push search to the right */
-.md-header__inner .md-search {
-  margin-left: auto !important;
-}
+/* The flex spacer above does the positioning; keep this empty on purpose. */

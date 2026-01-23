@@ -6,8 +6,6 @@ icon: bootstrap/puzzle
 
 # Problems
 
-![Problems Feature](assets/images/problems_section.svg){ width="400" }
-
 omegaUp supports creating programming problems through two methods: the visual Problem Creator (CDP) or manual ZIP file generation.
 
 ## Problem Creation Methods

@@ -1,5 +1,5 @@
 ---
-title: Welcome to omegaUp Documentation
+title: Welcome
 description: Complete documentation for the omegaUp educational programming platform
 icon: bootstrap/home
 ---

@@ -6,8 +6,6 @@ icon: bootstrap/trophy
 
 # Contests
 
-![Contests Feature](assets/images/contests_section.svg){ width="400" }
-
 omegaUp provides comprehensive contest management capabilities for organizing programming competitions.
 
 ## Contest Types

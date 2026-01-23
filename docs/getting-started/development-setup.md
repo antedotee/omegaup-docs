@@ -1,6 +1,7 @@
 ---
 title: Development Environment Setup
 description: Complete guide to setting up your local omegaUp development environment
+icon: bootstrap/tools
 ---
 
 # Development Environment Setup

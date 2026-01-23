@@ -1,6 +1,7 @@
 ---
 title: Badges
 description: Achievement system implementation
+icon: bootstrap/award
 ---
 
 # Badges

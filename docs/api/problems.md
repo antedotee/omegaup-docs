@@ -1,6 +1,7 @@
 ---
 title: Problems API
 description: API endpoints for problem creation and management
+icon: bootstrap/puzzle
 ---
 
 # Problems API

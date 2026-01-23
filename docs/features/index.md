@@ -1,6 +1,7 @@
 ---
 title: Features
 description: Feature-specific documentation for omegaUp
+icon: bootstrap/star
 ---
 
 # Features Documentation

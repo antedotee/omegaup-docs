@@ -1,6 +1,7 @@
 ---
 title: API Reference
 description: Complete REST API documentation for omegaUp
+icon: bootstrap/api
 ---
 
 # API Reference

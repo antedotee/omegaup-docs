@@ -1,9 +1,10 @@
 ---
 title: Welcome to omegaUp Documentation
 description: Complete documentation for the omegaUp educational programming platform
+icon: bootstrap/home
 ---
 
-![omegaUp Logo](assets/images/omegaup.svg){ width="300" }
+![omegaUp Logo](assets/images/omegaup.png){ width="300" style="max-width: 100%; height: auto; object-fit: contain;" }
 
 # Welcome to omegaUp Documentation
 

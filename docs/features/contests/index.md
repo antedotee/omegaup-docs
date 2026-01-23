@@ -1,6 +1,7 @@
 ---
 title: Contests
 description: Organizing and managing programming contests
+icon: bootstrap/trophy
 ---
 
 # Contests

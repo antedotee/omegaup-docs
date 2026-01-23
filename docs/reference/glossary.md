@@ -1,6 +1,7 @@
 ---
 title: Glossary
 description: Terminology and definitions used in omegaUp
+icon: bootstrap/book-open
 ---
 
 # Glossary

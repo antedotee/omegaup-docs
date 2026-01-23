@@ -1,6 +1,7 @@
 ---
 title: Vue Components
 description: Vue.js component development and Storybook integration
+icon: bootstrap/view-grid
 ---
 
 # Vue Components

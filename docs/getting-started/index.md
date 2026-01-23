@@ -1,9 +1,10 @@
 ---
 title: Getting Started
 description: Start your journey contributing to omegaUp
+icon: bootstrap/rocket-launch
 ---
 
-![omegaUp Logo](assets/images/omegaup.svg){ width="200" }
+![omegaUp Logo](assets/images/omegaup.png){ width="200" style="max-width: 100%; height: auto; object-fit: contain;" }
 
 # Getting Started with omegaUp Development
 

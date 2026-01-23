@@ -1,6 +1,7 @@
 ---
 title: Runs API
 description: Submission handling and result retrieval endpoints
+icon: bootstrap/play-circle
 ---
 
 # Runs API

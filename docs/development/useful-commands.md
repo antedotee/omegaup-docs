@@ -1,6 +1,7 @@
 ---
 title: Useful Development Commands
 description: Common commands and shortcuts for omegaUp development
+icon: bootstrap/terminal
 ---
 
 # Useful Development Commands

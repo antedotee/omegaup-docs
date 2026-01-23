@@ -1,6 +1,7 @@
 ---
 title: MVC Pattern
 description: How omegaUp implements the Model-View-Controller pattern
+icon: bootstrap/view-grid
 ---
 
 # MVC Pattern in omegaUp

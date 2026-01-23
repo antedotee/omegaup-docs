@@ -1,6 +1,7 @@
 ---
 title: Coding Guidelines
 description: Coding standards and best practices for omegaUp development
+icon: bootstrap/code
 ---
 
 # Coding Guidelines

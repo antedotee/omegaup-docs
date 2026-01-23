@@ -1,6 +1,7 @@
 ---
 title: Development Guides
 description: Developer guides, coding standards, and best practices
+icon: bootstrap/code-tags
 ---
 
 # Development Guides

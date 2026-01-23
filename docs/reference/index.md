@@ -1,6 +1,7 @@
 ---
 title: Reference
 description: Quick reference guides and resources
+icon: bootstrap/book
 ---
 
 # Reference

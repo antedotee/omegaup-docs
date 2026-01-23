@@ -73,3 +73,28 @@
 .md-typeset .admonition.danger {
   border-color: #b94a48;  /* --status-error-color */
 }
+
+/* Fix logo rendering on homepage - prevent cropping */
+.md-typeset img[alt*="omegaUp Logo"],
+.md-typeset img[src*="omegaup.svg"],
+.md-typeset img[src*="omegaup.png"] {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* Hide site name from navbar - only show logo */
+.md-header__title {
+  display: none !important;
+}
+
+.md-header__topic {
+  display: none !important;
+}
+
+/* Move search bar to the right side of header */
+/* Material theme already uses flexbox, so we just need to push search to the right */
+.md-header__inner .md-search {
+  margin-left: auto !important;
+}

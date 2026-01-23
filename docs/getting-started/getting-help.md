@@ -1,6 +1,7 @@
 ---
 title: Getting Help
 description: Learn how to effectively ask questions and get help from the omegaUp community
+icon: bootstrap/help-circle
 ---
 
 # Getting Help

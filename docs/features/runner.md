@@ -1,6 +1,7 @@
 ---
 title: Runner
 description: Code compilation and execution system
+icon: bootstrap/play-circle
 ---
 
 # Runner

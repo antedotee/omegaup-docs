@@ -1,6 +1,7 @@
 ---
 title: Useful Links
 description: External resources and documentation links
+icon: bootstrap/link
 ---
 
 # Useful Links

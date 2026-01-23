@@ -1,6 +1,7 @@
 ---
 title: Recruitment
 description: How to join the omegaUp engineering team
+icon: bootstrap/briefcase
 ---
 
 # Recruitment Process

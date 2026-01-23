@@ -120,9 +120,51 @@ jobs:
           
           print(f"✓ Fixed asset paths in {files_modified} files")
           
+          # Fix favicon links in HTML head - ensure omegaUp favicon is used
+          favicon_fixed = 0
+          for html_file in html_files:
+            with open(html_file, 'r', encoding='utf-8') as f:
+              content = f.read()
+            
+            original = content
+            
+            # Replace any zensical/default favicon references with omegaUp favicon
+            if base_path:
+              favicon_path = f"{base_path}/assets/images/favicon.png"
+              favicon_ico_path = f"{base_path}/assets/images/favicon.ico"
+            else:
+              favicon_path = "/assets/images/favicon.png"
+              favicon_ico_path = "/assets/images/favicon.ico"
+            
+            # Replace favicon link tags
+            content = re.sub(
+              r'<link[^>]*rel=["\'](?:shortcut )?icon["\'][^>]*>',
+              f'<link rel="icon" href="{favicon_ico_path}">\n    <link rel="icon" type="image/png" href="{favicon_path}">',
+              content,
+              flags=re.IGNORECASE
+            )
+            
+            # Also ensure favicon is in head if missing
+            if '<link rel="icon"' not in content.lower():
+              # Insert before </head>
+              content = re.sub(
+                r'(</head>)',
+                f'    <link rel="icon" href="{favicon_ico_path}">\n    <link rel="icon" type="image/png" href="{favicon_path}">\n\\1',
+                content,
+                flags=re.IGNORECASE
+              )
+            
+            if content != original:
+              with open(html_file, 'w', encoding='utf-8') as f:
+                f.write(content)
+              favicon_fixed += 1
+          
+          if favicon_fixed > 0:
+            print(f"✓ Fixed favicon links in {favicon_fixed} files")
+          
           # Add .nojekyll to site directory
           with open('site/.nojekyll', 'w') as f:
-              f.write('')
+            f.write('')
           print("✓ Created .nojekyll")
           FIXPATHS
       - uses: actions/upload-pages-artifact@v4

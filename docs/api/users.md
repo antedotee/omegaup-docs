@@ -1,6 +1,7 @@
 ---
 title: Users API
 description: User management and authentication endpoints
+icon: bootstrap/account-group
 ---
 
 # Users API

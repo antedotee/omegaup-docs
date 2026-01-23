@@ -1,6 +1,7 @@
 ---
 title: Authentication
 description: API authentication and security
+icon: bootstrap/key
 ---
 
 # API Authentication

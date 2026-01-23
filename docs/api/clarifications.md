@@ -1,6 +1,7 @@
 ---
 title: Clarifications API
 description: Contest clarification endpoints
+icon: bootstrap/help-circle
 ---
 
 # Clarifications API

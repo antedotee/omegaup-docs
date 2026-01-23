@@ -1,6 +1,7 @@
 ---
 title: Google Summer of Code
 description: omegaUp's Google Summer of Code program
+icon: bootstrap/school
 ---
 
 # Google Summer of Code

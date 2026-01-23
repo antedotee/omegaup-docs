@@ -1,6 +1,7 @@
 ---
 title: REST API Overview
 description: Complete REST API documentation for omegaUp
+icon: bootstrap/cloud
 ---
 
 # omegaUp REST API

@@ -1,6 +1,7 @@
 ---
 title: Deployment
 description: Release and deployment process for omegaUp
+icon: bootstrap/rocket-launch
 ---
 
 # Release and Deployment

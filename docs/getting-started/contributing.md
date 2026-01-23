@@ -1,6 +1,7 @@
 ---
 title: Contributing to omegaUp
 description: Learn how to contribute code to omegaUp through pull requests
+icon: bootstrap/code-tags
 ---
 
 # Contributing to omegaUp

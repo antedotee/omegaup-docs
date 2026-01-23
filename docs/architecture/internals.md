@@ -1,6 +1,7 @@
 ---
 title: System Internals
 description: Deep dive into how omegaUp processes submissions and evaluates code
+icon: bootstrap/cog
 ---
 
 # System Internals

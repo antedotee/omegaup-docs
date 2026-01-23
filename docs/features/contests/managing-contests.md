@@ -1,6 +1,7 @@
 ---
 title: Managing Contests
 description: Guide to creating and managing programming contests
+icon: bootstrap/cog
 ---
 
 # Managing Contests

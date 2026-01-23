@@ -1,6 +1,7 @@
 ---
 title: Operations
 description: Deployment, infrastructure, and operational guides
+icon: bootstrap/server
 ---
 
 # Operations

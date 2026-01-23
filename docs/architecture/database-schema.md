@@ -1,6 +1,7 @@
 ---
 title: Database Schema
 description: Database structure and relationships in omegaUp
+icon: bootstrap/database
 ---
 
 # Database Schema

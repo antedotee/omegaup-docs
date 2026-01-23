@@ -1,6 +1,7 @@
 ---
 title: Architecture Overview
 description: Understanding omegaUp's system architecture and design patterns
+icon: bootstrap/sitemap
 ---
 
 ![omegaUp Architecture](assets/images/omegaup_curves.svg){ width="300" }

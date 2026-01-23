@@ -1,6 +1,7 @@
 ---
 title: Community
 description: Community programs and contributions
+icon: bootstrap/account-group
 ---
 
 # Community

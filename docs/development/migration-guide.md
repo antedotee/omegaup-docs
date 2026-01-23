@@ -1,6 +1,7 @@
 ---
 title: Migration Guide
 description: Migrating from Smarty templates to Vue.js and TypeScript
+icon: bootstrap/arrow-right
 ---
 
 # Migration Guide: Smarty to Vue.js/TypeScript

@@ -1,6 +1,7 @@
 ---
 title: Problem Format
 description: ZIP file structure for manual problem creation
+icon: bootstrap/file-document
 ---
 
 # Problem Format

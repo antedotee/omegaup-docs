@@ -1,6 +1,7 @@
 ---
 title: Testing Guide
 description: Comprehensive testing guide for omegaUp
+icon: bootstrap/flask
 ---
 
 # Testing Guide

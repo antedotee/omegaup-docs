@@ -1,6 +1,7 @@
 ---
 title: Grader
 description: Submission queue management and evaluation system
+icon: bootstrap/check-circle
 ---
 
 # Grader

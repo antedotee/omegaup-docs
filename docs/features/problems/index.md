@@ -1,6 +1,7 @@
 ---
 title: Problems
 description: Creating and managing programming problems in omegaUp
+icon: bootstrap/puzzle
 ---
 
 # Problems

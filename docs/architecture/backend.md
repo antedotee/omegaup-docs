@@ -1,6 +1,7 @@
 ---
 title: Backend Architecture
 description: PHP controllers, DAO/VO patterns, and API structure
+icon: bootstrap/server
 ---
 
 # Backend Architecture

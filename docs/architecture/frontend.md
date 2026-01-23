@@ -1,6 +1,7 @@
 ---
 title: Frontend Architecture
 description: Frontend structure, Vue.js components, and TypeScript organization
+icon: bootstrap/web
 ---
 
 # Frontend Architecture

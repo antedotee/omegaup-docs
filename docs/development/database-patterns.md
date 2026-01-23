@@ -1,6 +1,7 @@
 ---
 title: Database Patterns
 description: Understanding DAO/VO patterns in omegaUp
+icon: bootstrap/table
 ---
 
 # Database Patterns: DAO/VO

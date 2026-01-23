@@ -1,6 +1,7 @@
 ---
 title: Arena
 description: Contest interface and problem-solving environment
+icon: bootstrap/play-circle
 ---
 
 # Arena

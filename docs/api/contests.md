@@ -1,6 +1,7 @@
 ---
 title: Contests API
 description: API endpoints for contest management and participation
+icon: bootstrap/trophy
 ---
 
 # Contests API

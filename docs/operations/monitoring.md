@@ -1,6 +1,7 @@
 ---
 title: Monitoring
 description: Monitoring tools and setup for omegaUp
+icon: bootstrap/chart-line
 ---
 
 # Monitoring

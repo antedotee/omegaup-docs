@@ -1,6 +1,7 @@
 ---
 title: Nginx Configuration
 description: Web server configuration for omegaUp
+icon: bootstrap/web
 ---
 
 # Nginx Configuration

@@ -9,64 +9,152 @@ copyright = "Copyright &copy; 2025 omegaUp"
 docs_dir = "docs"
 extra_css = ["stylesheets/omegaup-theme.css"]
 
-[theme]
+[project.theme]
 name = "material"
 palette.primary = "custom"
 palette.accent = "custom"
 palette.scheme = "default"
 favicon = "assets/images/favicon.png"
-logo = "assets/images/omegaup.svg"
-
-[theme.features]
-navigation.tabs = true
-navigation.sections = true
-navigation.expand = true
-navigation.top = true
-search.suggest = true
-search.highlight = true
-content.code.copy = true
-content.code.annotate = true
-
-[markdown]
-extensions = [
-    "admonition",
-    "attr_list",
-    "def_list",
-    "footnotes",
-    "md_in_html",
-    "tables",
-    "pymdownx.arithmatex",
-    "pymdownx.betterem",
-    "pymdownx.caret",
-    "pymdownx.details",
-    "pymdownx.emoji",
-    "pymdownx.highlight",
-    "pymdownx.inlinehilite",
-    "pymdownx.keys",
-    "pymdownx.magiclink",
-    "pymdownx.mark",
-    "pymdownx.smartsymbols",
-    "pymdownx.superfences",
-    "pymdownx.tasklist",
-    "pymdownx.tilde",
-    "pymdownx.mermaid",
+# Custom omegaUp logo (using PNG image file)
+# To use a bundled icon instead, use: [project.theme.icon] logo = "lucide/smile"
+logo = "assets/images/omegaup.png"
+custom_dir = "overrides"
+features = [
+    "navigation.tabs",
+    "navigation.sections",
+    "navigation.expand",
+    "navigation.top",
+    "search.suggest",
+    "search.highlight",
+    "content.code.copy",
+    "content.code.annotate",
 ]
 
-[plugins]
-search.enabled = true
+[project.markdown_extensions.admonition]
+[project.markdown_extensions.attr_list]
+[project.markdown_extensions.def_list]
+[project.markdown_extensions.footnotes]
+[project.markdown_extensions.md_in_html]
+[project.markdown_extensions.tables]
+[project.markdown_extensions.pymdownx.arithmatex]
+[project.markdown_extensions.pymdownx.betterem]
+[project.markdown_extensions.pymdownx.caret]
+[project.markdown_extensions.pymdownx.details]
+[project.markdown_extensions.pymdownx.emoji]
+emoji_index = "zensical.extensions.emoji.twemoji"
+emoji_generator = "zensical.extensions.emoji.to_svg"
+options.custom_icons = ["overrides/.icons"]
+[project.markdown_extensions.pymdownx.highlight]
+[project.markdown_extensions.pymdownx.inlinehilite]
+[project.markdown_extensions.pymdownx.keys]
+[project.markdown_extensions.pymdownx.magiclink]
+[project.markdown_extensions.pymdownx.mark]
+[project.markdown_extensions.pymdownx.smartsymbols]
+[project.markdown_extensions.pymdownx.superfences]
+[project.markdown_extensions.pymdownx.tasklist]
+[project.markdown_extensions.pymdownx.tilde]
 
-# Navigation will be auto-detected from directory structure
-# For explicit navigation, uncomment and configure below:
+# Navigation with icons
+# Note: Navigation is auto-detected from directory structure
+# Icons are configured in each page's front matter using the 'icon:' key
+# Uncomment below to use explicit navigation (currently using auto-detection)
 # nav = [
-#   { Home = "index.md" },
-#   { "Getting Started" = [
+#   "index.md",
+#   {
+#     "Getting Started" = [
 #       "getting-started/index.md",
 #       "getting-started/development-setup.md",
 #       "getting-started/contributing.md",
 #       "getting-started/getting-help.md"
 #     ]
+#   },
+#   {
+#     "API Reference" = [
+#       "api/index.md",
+#       "api/rest-api.md",
+#       "api/authentication.md",
+#       "api/users.md",
+#       "api/problems.md",
+#       "api/contests.md",
+#       "api/runs.md",
+#       "api/clarifications.md"
+#     ]
+#   },
+#   {
+#     "Architecture" = [
+#       "architecture/index.md",
+#       "architecture/mvc-pattern.md",
+#       "architecture/frontend.md",
+#       "architecture/backend.md",
+#       "architecture/database-schema.md",
+#       "architecture/internals.md"
+#     ]
+#   },
+#   {
+#     "Development" = [
+#       "development/index.md",
+#       "development/coding-guidelines.md",
+#       "development/components.md",
+#       "development/database-patterns.md",
+#       "development/testing.md",
+#       "development/migration-guide.md",
+#       "development/useful-commands.md"
+#     ]
+#   },
+#   {
+#     "Features" = [
+#       "features/index.md",
+#       {
+#         "Problems" = [
+#           "features/problems/index.md",
+#           "features/problems/creating-problems.md",
+#           "features/problems/problem-format.md"
+#         ]
+#       },
+#       {
+#         "Contests" = [
+#           "features/contests/index.md",
+#           "features/contests/managing-contests.md"
+#         ]
+#       },
+#       "features/arena.md",
+#       "features/grader.md",
+#       "features/runner.md",
+#       "features/sandbox.md",
+#       "features/badges.md"
+#     ]
+#   },
+#   {
+#     "Operations" = [
+#       "operations/index.md",
+#       "operations/deployment.md",
+#       "operations/nginx-configuration.md",
+#       "operations/monitoring.md",
+#       "operations/troubleshooting.md"
+#     ]
+#   },
+#   {
+#     "Community" = [
+#       "community/index.md",
+#       {
+#         "GSoC" = [
+#           "community/gsoc/index.md",
+#           "community/gsoc/2025.md",
+#           "community/gsoc/2024.md",
+#           "community/gsoc/2023.md"
+#         ]
+#       },
+#       "community/recruitment.md"
+#     ]
+#   },
+#   {
+#     "Reference" = [
+#       "reference/index.md",
+#       "reference/glossary.md",
+#       "reference/links.md"
+#     ]
 #   }
 # ]
 
-[extra]
+[project.extra]
 version = "1.0.0"

@@ -1,6 +1,7 @@
 ---
 title: Creating Problems
 description: Step-by-step guide to creating programming problems
+icon: bootstrap/plus-circle
 ---
 
 # Creating Problems

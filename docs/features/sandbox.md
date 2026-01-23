@@ -1,6 +1,7 @@
 ---
 title: Sandbox
 description: Secure code execution environment
+icon: bootstrap/shield
 ---
 
 # Sandbox

@@ -56,14 +56,28 @@ custom_fences = [
 
 #
 # Navigation
-[project.nav]
+[[project.nav]]
 "Começando" = "getting-started/"
+
+[[project.nav]]
 "Arquitetura" = "architecture/"
+
+[[project.nav]]
 "Recursos" = "features/"
+
+[[project.nav]]
 "Desenvolvimento" = "development/"
+
+[[project.nav]]
 "Referência da API" = "api/"
+
+[[project.nav]]
 "Operações" = "operations/"
+
+[[project.nav]]
 "Comunidade" = "community/"
+
+[[project.nav]]
 "Referência" = "reference/"
 
 [project.extra]

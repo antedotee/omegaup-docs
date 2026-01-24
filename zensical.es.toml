@@ -55,15 +55,29 @@ custom_fences = [
 [project.markdown_extensions.pymdownx.tilde]
 
 #
-# Navigation  
-[project.nav]
+# Navigation
+[[project.nav]]
 "Empezando" = "getting-started/"
+
+[[project.nav]]
 "Arquitectura" = "architecture/"
-"Características" = "features/"
+
+[[project.nav]]
+"Características" ="features/"
+
+[[project.nav]]
 "Desarrollo" = "development/"
+
+[[project.nav]]
 "Referencia de API" = "api/"
+
+[[project.nav]]
 "Operaciones" = "operations/"
+
+[[project.nav]]
 "Comunidad" = "community/"
+
+[[project.nav]]
 "Referencia" = "reference/"
 
 [project.extra]

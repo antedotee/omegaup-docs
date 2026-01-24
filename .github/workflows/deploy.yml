@@ -189,31 +189,32 @@ jobs:
           print("✓ Created .nojekyll")
 
           # Add redirect from / -> /en/
-          redirect_html = (
-            '<!doctype html>\\n'
-            '<html lang="en">\\n'
-            '  <head>\\n'
-            '    <meta charset="utf-8" />\\n'
-            '    <meta name="viewport" content="width=device-width, initial-scale=1" />\\n'
-            '    <meta http-equiv="refresh" content="0; url=./en/" />\\n'
-            '    <link rel="canonical" href="./en/" />\\n'
-            '    <title>omegaUp Documentation</title>\\n'
-            '    <script>\\n'
-            '      (function() {\\n'
-            '        var target = \\'./en/\\';\\n'
-            '        if (location.pathname.endsWith(\\'/\\') || location.pathname.endsWith(\\'/index.html\\')) {\\n'
-            '          location.replace(target);\\n'
-            '        } else {\\n'
-            '          location.replace(location.pathname.replace(/[^/]*$/, \\'\\') + target);\\n'
-            '        }\\n'
-            '      })();\\n'
-            '    </script>\\n'
-            '  </head>\\n'
-            '  <body>\\n'
-            '    <p>Redirecting to <a href="./en/">English documentation</a>…</p>\\n'
-            '  </body>\\n'
-            '</html>\\n'
-          )
+          import textwrap
+          redirect_html = textwrap.dedent("""\
+            <!doctype html>
+            <html lang="en">
+              <head>
+                <meta charset="utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <meta http-equiv="refresh" content="0; url=./en/" />
+                <link rel="canonical" href="./en/" />
+                <title>omegaUp Documentation</title>
+                <script>
+                  (function() {
+                    var target = './en/';
+                    if (location.pathname.endsWith('/') || location.pathname.endsWith('/index.html')) {
+                      location.replace(target);
+                    } else {
+                      location.replace(location.pathname.replace(/[^/]*$/, '') + target);
+                    }
+                  })();
+                </script>
+              </head>
+              <body>
+                <p>Redirecting to <a href="./en/">English documentation</a>…</p>
+              </body>
+            </html>
+            """)
           with open('site/index.html', 'w', encoding='utf-8') as f:
             f.write(redirect_html)
           print("✓ Created / -> /en/ redirect (site/index.html)")

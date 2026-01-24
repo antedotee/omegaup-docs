@@ -1,0 +1,151 @@
+{
+  "years": {
+    "2025": {
+      "type": "current",
+      "title": "GSoC 2025",
+      "description": "Google Summer of Code 2025 program at omegaUp",
+      "intro": "omegaUp is participating in Google Summer of Code 2025! We're looking for motivated students to contribute to our open-source educational platform.",
+      "project_ideas": [
+        {
+          "name": "AI Teaching Assistant",
+          "description": "Create a bot that can answer clarifications and perform code reviews proactively and upon request.",
+          "skills": "Python, PHP, MySQL, LLM Prompt Engineering, REST APIs",
+          "size": "350 hours",
+          "level": "Advanced"
+        },
+        {
+          "name": "Generate Problem Editorials Using AI",
+          "description": "Use generative AI to create and validate editorials for thousands of public problems.",
+          "skills": "Python, LLM Prompt Engineering, PHP, Vue.js",
+          "size": "350 hours",
+          "level": "Advanced"
+        },
+        {
+          "name": "Public Courses on GitHub",
+          "description": "Manage public course content through GitHub, allowing community contributions via pull requests.",
+          "skills": "git/github, Python, Continuous Integration, REST APIs",
+          "size": "175 hours",
+          "level": "Medium to Advanced"
+        },
+        {
+          "name": "Cronjob Optimization",
+          "description": "Optimize cronjobs for efficiency, increase test coverage, and improve debugability.",
+          "skills": "Python, MySQL, PHP, Unit and Integration Testing",
+          "size": "350 hours",
+          "level": "High"
+        },
+        {
+          "name": "Integrate Problem Creator",
+          "description": "Fully integrate the Problem Creator visual editor with omegaUp's create/edit problem workflows.",
+          "skills": "Vue.js, TypeScript, PHP",
+          "size": "350 hours",
+          "level": "Medium"
+        },
+        {
+          "name": "Code Coverage for E2E Tests",
+          "description": "Measure Cypress test coverage in Codecov to enforce minimum coverage levels.",
+          "skills": "Integration testing, TypeScript, PHP",
+          "size": "90 hours",
+          "level": "Medium"
+        }
+      ],
+      "application_process": {
+        "phase1": {
+          "title": "Phase 1: Complete Test",
+          "steps": [
+            "Create account at [omegaUp.com](https://omegaup.com)",
+            "Join [GSoC 2025 Test](https://omegaup.com/contest/gsoc2025)",
+            "Solve at least 2 of 3 problems"
+          ]
+        },
+        "phase2": {
+          "title": "Phase 2: Familiarize with Codebase",
+          "steps": [
+            "Set up [development environment](../../getting-started/development-setup.md)",
+            "Find and fix a bug from [Good first issues](https://github.com/omegaup/omegaup/labels/Good%20first%20issue)",
+            "Submit PR and get it merged"
+          ]
+        },
+        "phase3": {
+          "title": "Phase 3: Write Proposal",
+          "steps": [
+            "Craft design document using [proposal template](https://docs.google.com/document/d/1_FKfpc2M3VLDVYqvT8ZgsgwIJ3zaZnyUVmSm-H3h6UQ/edit)",
+            "Send draft for feedback via [form](https://forms.gle/TbbscnWA5B2ZWfJq7)",
+            "Submit final proposal to Google"
+          ]
+        },
+        "phase4": {
+          "title": "Phase 4: Interview",
+          "description": "Selected candidates will be interviewed with behavioral and technical questions."
+        }
+      },
+      "communications": [
+        "**Discord**: [Join our Discord server](https://discord.gg/gMEMX7Mrwe)",
+        "**Getting Help**: See [Getting Help guide](../../getting-started/getting-help.md)"
+      ],
+      "faq": [
+        {
+          "question": "Do I need to speak Spanish?",
+          "answer": "No, English is fine. We're inclusive to all languages."
+        },
+        {
+          "question": "How many spots are available?",
+          "answer": "We're requesting 2 students, but final numbers will be confirmed in mid-May."
+        },
+        {
+          "question": "How are students selected?",
+          "answer": "Based on skill level (PRs or experience), work plan quality, and cultural fit."
+        }
+      ],
+      "related_docs": [
+        "[Getting Started](../../getting-started/index.md) - Development setup",
+        "[Contributing](../../getting-started/contributing.md) - How to contribute",
+        "[Architecture](../../architecture/index.md) - System architecture"
+      ]
+    },
+    "2024": {
+      "type": "past",
+      "title": "GSoC 2024",
+      "description": "Google Summer of Code 2024 projects",
+      "intro": "Projects completed during GSoC 2024.",
+      "projects": [
+        {
+          "name": "Migrate Problem Creator to Vue.js + TypeScript",
+          "description": "Migrated the Problem Creator to Vue.js + TypeScript for integration into omegaUp.com.",
+          "result": "Problem Creator can now be used directly on omegaUp.com without external website."
+        },
+        {
+          "name": "Public Courses on GitHub",
+          "description": "Enabled GitHub-based management of public course content with community contributions.",
+          "result": "Course content can be improved through pull requests."
+        }
+      ],
+      "related_docs": [
+        "[GSoC 2025](2025.md) - Current year program",
+        "[Community](../../community/index.md) - Community programs"
+      ]
+    },
+    "2023": {
+      "type": "past",
+      "title": "GSoC 2023",
+      "description": "Google Summer of Code 2023 projects",
+      "intro": "Projects completed during GSoC 2023.",
+      "projects": [
+        {
+          "name": "Accounts for Children",
+          "description": "Introduced restricted accounts for children under 13, allowing safe access to curated content.",
+          "result": "Children can safely use omegaUp with teacher assistance."
+        },
+        {
+          "name": "Cypress Migration",
+          "description": "Migrated Selenium tests to Cypress framework for better reliability and maintainability.",
+          "result": "Faster, more reliable E2E tests."
+        }
+      ],
+      "related_docs": [
+        "[GSoC 2025](2025.md) - Current year program",
+        "[Community](../../community/index.md) - Community programs"
+      ]
+    }
+  }
+}

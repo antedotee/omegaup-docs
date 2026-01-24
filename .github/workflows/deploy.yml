@@ -29,6 +29,7 @@ jobs:
           python3 << 'EOF'
           import re
           import os
+          import glob
           
           owner = os.environ.get('GITHUB_REPOSITORY_OWNER', '')
           repo_name = os.environ.get('GITHUB_REPOSITORY_NAME', '')
@@ -39,30 +40,38 @@ jobs:
           else:
               site_url = f"https://{owner}.github.io/{repo_name}/"
           
-          # Read and update zensical.toml
-          with open('zensical.toml', 'r') as f:
-              content = f.read()
-          
-          # Update site_url
+          toml_files = sorted(glob.glob('zensical*.toml'))
+          if not toml_files:
+              raise RuntimeError("No zensical*.toml files found")
+
           pattern = r'site_url\s*=\s*["\'][^"\']*["\']'
-          content = re.sub(pattern, f'site_url = "{site_url}"', content)
-          
-          # Ensure use_directory_urls is set
-          if 'use_directory_urls' not in content:
-              content = re.sub(
-                  r'(site_url\s*=\s*"[^"]*")',
-                  r'\1\nuse_directory_urls = true',
-                  content,
-                  count=1
-              )
-          
-          with open('zensical.toml', 'w') as f:
-              f.write(content)
-          
-          print(f"✓ Configured site_url: {site_url}")
+          for path in toml_files:
+              with open(path, 'r', encoding='utf-8') as f:
+                  content = f.read()
+
+              content = re.sub(pattern, f'site_url = "{site_url}"', content)
+
+              # Ensure use_directory_urls is set (Zensical also forces false for offline usage)
+              if 'use_directory_urls' not in content:
+                  content = re.sub(
+                      r'(site_url\s*=\s*"[^"]*")',
+                      r'\1\nuse_directory_urls = true',
+                      content,
+                      count=1
+                  )
+
+              with open(path, 'w', encoding='utf-8') as f:
+                  f.write(content)
+
+              print(f"✓ Configured site_url in {path}: {site_url}")
           EOF
       - name: Build site
-        run: zensical build --clean
+        run: |
+          rm -rf site
+          zensical build --clean --config-file zensical.toml
+          zensical build --clean --config-file zensical.es.toml
+          zensical build --clean --config-file zensical.pt.toml
+          zensical build --clean --config-file zensical.pt-BR.toml
       - name: Fix asset paths for GitHub Pages
         env:
           GITHUB_REPOSITORY_NAME: ${{ github.event.repository.name }}
@@ -97,19 +106,32 @@ jobs:
                   content = f.read()
               
               original = content
+
+              # Determine language prefix from file location:
+              # site/<lang>/... -> prefix "/<base>/<lang>"
+              rel = os.path.relpath(html_file, 'site')
+              lang = rel.split(os.sep, 1)[0]
+              prefix = f"{base_path}/{lang}" if base_path else f"/{lang}"
               
               # Fix CSS/JS asset paths: convert relative to absolute with base path
+              # Fix href="assets/..." -> href="/repo/<lang>/assets/..."
+              content = re.sub(
+                  r'href=(["\'])(?!/|https?://|//)(assets/[^"\']+)',
+                  lambda m: f'href={m.group(1)}{prefix}/{m.group(2)}{m.group(1)}',
+                  content
+              )
+              # Fix src="assets/..." -> src="/repo/<lang>/assets/..."
+              content = re.sub(
+                  r'src=(["\'])(?!/|https?://|//)(assets/[^"\']+)',
+                  lambda m: f'src={m.group(1)}{prefix}/{m.group(2)}{m.group(1)}',
+                  content
+              )
+
+              # Fix language selector links (configured as /en/, /es/, ...)
               if base_path:
-                  # Fix href="assets/..." -> href="/repo/assets/..."
                   content = re.sub(
-                      r'href=(["\'])(?!/|https?://|//)(assets/[^"\']+)',
-                      lambda m: f'href={m.group(1)}{base_path}/{m.group(2)}{m.group(1)}',
-                      content
-                  )
-                  # Fix src="assets/..." -> src="/repo/assets/..."
-                  content = re.sub(
-                      r'src=(["\'])(?!/|https?://|//)(assets/[^"\']+)',
-                      lambda m: f'src={m.group(1)}{base_path}/{m.group(2)}{m.group(1)}',
+                      r'href=(["\'])(/(?:en|es|pt|pt-BR)/)(["\'])',
+                      lambda m: f'href={m.group(1)}{base_path}{m.group(2)}{m.group(3)}',
                       content
                   )
               
@@ -128,13 +150,12 @@ jobs:
             
             original = content
             
-            # Replace any zensical/default favicon references with omegaUp favicon
-            if base_path:
-              favicon_path = f"{base_path}/assets/images/favicon.png"
-              favicon_ico_path = f"{base_path}/assets/images/favicon.ico"
-            else:
-              favicon_path = "/assets/images/favicon.png"
-              favicon_ico_path = "/assets/images/favicon.ico"
+            rel = os.path.relpath(html_file, 'site')
+            lang = rel.split(os.sep, 1)[0]
+            prefix = f"{base_path}/{lang}" if base_path else f"/{lang}"
+
+            favicon_path = f"{prefix}/assets/images/favicon.png"
+            favicon_ico_path = f"{prefix}/assets/images/favicon.ico"
             
             # Replace favicon link tags
             content = re.sub(
@@ -166,6 +187,35 @@ jobs:
           with open('site/.nojekyll', 'w') as f:
             f.write('')
           print("✓ Created .nojekyll")
+
+          # Add redirect from / -> /en/
+          with open('site/index.html', 'w', encoding='utf-8') as f:
+            f.write("""<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="refresh" content="0; url=./en/" />
+    <link rel="canonical" href="./en/" />
+    <title>omegaUp Documentation</title>
+    <script>
+      (function() {
+        // Use a relative redirect so this works on GitHub Pages subpaths.
+        var target = './en/';
+        if (location.pathname.endsWith('/') || location.pathname.endsWith('/index.html')) {
+          location.replace(target);
+        } else {
+          location.replace(location.pathname.replace(/[^/]*$/, '') + target);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <p>Redirecting to <a href="./en/">English documentation</a>…</p>
+  </body>
+</html>
+""")
+          print("✓ Created / -> /en/ redirect (site/index.html)")
           FIXPATHS
       - uses: actions/upload-pages-artifact@v4
         with:

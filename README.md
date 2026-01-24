@@ -41,27 +41,154 @@ site_url = "https://docs.omegaup.com"
 
 ## Local Development
 
-### Install Zensical
+This documentation site supports multiple languages (English, Spanish, Portuguese, and Brazilian Portuguese). Follow these steps to set up and run the site locally.
+
+### 1. Initial Setup
+
+#### Create and activate a virtual environment (recommended)
+
+```bash
+# Create virtual environment
+python3 -m venv .venv
+
+# Activate virtual environment
+# On macOS/Linux:
+source .venv/bin/activate
+# On Windows:
+# .venv\Scripts\activate
+```
+
+#### Install dependencies
 
 ```bash
 pip install zensical
 ```
 
-### Build the site locally
+### 2. Building the Documentation
+
+#### Quick Build - All Languages
+
+To build all language versions at once, use the provided build script:
 
 ```bash
-zensical build
+python3 build_all.py
 ```
 
-The built site will be in the `site/` directory.
+This will:
+- Clean the existing `site/` directory
+- Build English (`/en/`), Spanish (`/es/`), Portuguese (`/pt/`), and Brazilian Portuguese (`/pt-BR/`) versions
+- Create a root redirect from `/` to `/en/`
 
-### Serve locally for preview
+#### Manual Build - Single Language
+
+To build only one language version:
 
 ```bash
-zensical serve
+# English (default)
+zensical build --clean --config-file zensical.toml
+
+# Spanish
+zensical build --clean --config-file zensical.es.toml
+
+# Portuguese
+zensical build --clean --config-file zensical.pt.toml
+
+# Brazilian Portuguese
+zensical build --clean --config-file zensical.pt-BR.toml
 ```
 
-Visit `http://127.0.0.1:8000` to preview your documentation.
+### 3. Serving Locally
+
+#### Multi-Language Server (Recommended)
+
+To test language switching and view all language versions:
+
+```bash
+python3 serve_multilang.py
+```
+
+Then open your browser to:
+- **Root (redirects to English):** http://localhost:8000/
+- **English:** http://localhost:8000/en/
+- **Español:** http://localhost:8000/es/
+- **Português:** http://localhost:8000/pt/
+- **Português (Brasil):** http://localhost:8000/pt-BR/
+
+> **Note:** The `serve_multilang.py` script properly serves all language directories and allows language switching to work correctly.
+
+#### Alternative - Simple HTTP Server
+
+```bash
+cd site
+python3 -m http.server 8000
+```
+
+#### Single Language Only (Not Recommended for Multi-Language Testing)
+
+```bash
+# This only serves English and won't allow language switching
+zensical serve --config-file zensical.toml
+```
+
+### 4. Making Changes
+
+#### Editing Content
+
+1. Edit the Markdown files in `docs/en/` for English content
+2. Rebuild the site: `python3 build_all.py`
+3. Refresh your browser to see changes
+
+#### Translating Content
+
+To translate English content to other languages:
+
+```bash
+# Translate all files
+python3 scripts/translate_docs.py
+
+# Translate specific language only
+python3 scripts/translate_docs.py --langs pt
+
+# Translate only specific files (for testing)
+python3 scripts/translate_docs.py --only "getting-started"
+```
+
+### 5. Troubleshooting
+
+#### Issue: 404 errors when clicking language links
+
+**Cause:** Using `zensical serve` which only serves one language directory.
+
+**Solution:** Use the multi-language server instead:
+```bash
+python3 serve_multilang.py
+```
+
+#### Issue: Changes not showing up
+
+**Cause:** Browser cache or stale build.
+
+**Solution:** 
+```bash
+# Clean rebuild
+python3 build_all.py
+
+# Or manually clear cache
+rm -rf .cache site
+```
+
+#### Issue: Missing dependencies
+
+**Cause:** Zensical not installed or virtual environment not activated.
+
+**Solution:**
+```bash
+# Activate virtual environment
+source .venv/bin/activate  # macOS/Linux
+
+# Install/upgrade Zensical
+pip install --upgrade zensical
+```
 
 ## Project Structure
 
@@ -69,19 +196,41 @@ Visit `http://127.0.0.1:8000` to preview your documentation.
 docs/
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml      # GitHub Actions deployment workflow
-├── .gitignore              # Git ignore rules
-├── zensical.toml           # Zensical configuration
-├── index.md                # Homepage
-├── api/                    # API documentation
-├── architecture/           # Architecture docs
-├── community/              # Community docs
-├── development/            # Development guides
-├── features/               # Feature documentation
-├── getting-started/        # Getting started guides
-├── operations/             # Operations docs
-└── reference/              # Reference materials
+│       └── deploy.yml          # GitHub Actions deployment workflow
+├── .venv/                      # Virtual environment (gitignored)
+├── .cache/                     # Build cache (gitignored)
+├── site/                       # Built site (gitignored)
+│   ├── en/                     # English version
+│   ├── es/                     # Spanish version
+│   ├── pt/                     # Portuguese version
+│   ├── pt-BR/                  # Brazilian Portuguese version
+│   └── index.html              # Root redirect to /en/
+├── docs/                       # Source documentation files
+│   ├── en/                     # English source (primary)
+│   ├── es/                     # Spanish translations
+│   ├── pt/                     # Portuguese translations
+│   └── pt-BR/                  # Brazilian Portuguese translations
+├── scripts/
+│   ├── translate_docs.py       # Auto-translate from English to other languages
+│   └── generate-gsoc-pages.py  # GSoC pages generator
+├── overrides/                  # Theme customizations
+├── .gitignore                  # Git ignore rules
+├── zensical.toml               # English config
+├── zensical.es.toml            # Spanish config
+├── zensical.pt.toml            # Portuguese config
+├── zensical.pt-BR.toml         # Brazilian Portuguese config
+├── build_all.py                # Build all language versions
+├── serve_multilang.py          # Multi-language development server
+└── README.md                   # This file
 ```
+
+### Language-Specific Configuration
+
+Each language has its own `zensical.*.toml` configuration file that specifies:
+- `site_dir`: Where to output the built files (e.g., `site/en/`, `site/pt/`)
+- `docs_dir`: Source directory for that language (e.g., `docs/en/`, `docs/pt/`)
+- `language`: The language code for theme localization
+- `alternate`: Links to other language versions for the language switcher
 
 ## Deployment
 

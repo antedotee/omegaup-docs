@@ -1,12 +1,9 @@
 [project]
 site_name = "omegaUp Documentation"
-# Update this URL after creating your GitHub repository
-# Format: https://YOUR_USERNAME.github.io/YOUR_REPO_NAME
-# Or use your custom domain: https://docs.omegaup.com
 site_url = "https://antedotee.github.io/omegaup-docs/"
-site_dir = "site/en"
+site_dir = "site/pt-BR"
 copyright = "Copyright &copy; 2025 omegaUp"
-docs_dir = "docs/en"
+docs_dir = "docs/pt-BR"
 use_directory_urls = true
 extra_css = ["stylesheets/omegaup-theme.css"]
 
@@ -15,10 +12,8 @@ name = "material"
 palette.primary = "custom"
 palette.accent = "custom"
 palette.scheme = "default"
-language = "en"
+language = "pt-BR"
 favicon = "assets/images/favicon.png"
-# Custom omegaUp logo (using PNG image file)
-# To use a bundled icon instead, use: [project.theme.icon] logo = "lucide/smile"
 logo = "assets/images/omegaup.png"
 custom_dir = "overrides"
 features = [
@@ -53,17 +48,11 @@ options.custom_icons = ["overrides/.icons"]
 [project.markdown_extensions.pymdownx.mark]
 [project.markdown_extensions.pymdownx.smartsymbols]
 [project.markdown_extensions.pymdownx.superfences]
-# Enable Mermaid diagram rendering (Zensical-native integration)
 custom_fences = [
     { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" },
 ]
 [project.markdown_extensions.pymdownx.tasklist]
 [project.markdown_extensions.pymdownx.tilde]
-
-#
-# Navigation
-# Zensical auto-detects navigation from the `docs/` directory structure by default.
-# If you later want to define an explicit nav, do it in a Zensical-supported format.
 
 [project.extra]
 version = "1.0.0"

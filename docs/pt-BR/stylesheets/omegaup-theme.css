@@ -1,0 +1,99 @@
+/* omegaUp Brand Colors for Documentation Site
+ * Based on omegaUp's official color scheme from:
+ * - frontend/www/sass/base/_colors.scss
+ * - frontend/www/sass/base/_variables.scss
+ * - omegaup.svg logo colors
+ */
+
+/* Primary Color: omegaUp Blue (#678dd7) - Main brand color */
+:root > * {
+  --md-primary-fg-color:        #678dd7;  /* --header-primary-color, --omegaup-blue */
+  --md-primary-fg-color--light:  #8bb0d3;  /* --omegaup-links */
+  --md-primary-fg-color--dark:   #466aaf;  /* --omegaup-primary--darker, homepage carousel */
+  
+  /* Accent color: Logo blue (#5588dd) for interactive elements */
+  --md-accent-fg-color:          #5588dd;  /* From omegaup.svg logo */
+  --md-accent-fg-color--transparent: rgba(103, 141, 215, 0.1);
+  
+  /* Link colors matching omegaUp brand */
+  --md-typeset-a-color:          #678dd7;
+  
+  /* Code block colors matching omegaUp style */
+  --md-code-bg-color:            #f5f5f5;  /* --header-problem-card-color-no-opacity */
+  --md-code-fg-color:            #333;      /* --header-font-secondary-color */
+  
+  /* Additional omegaUp colors */
+  --omegaup-green:               #35b835;   /* Success states */
+  --omegaup-grey:                #4b4b4b;   /* Secondary text */
+  --omegaup-dark-grey:          #353a40;   /* Dark backgrounds */
+}
+
+/* Dark mode support (slate theme) */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color:        #678dd7;
+  --md-primary-fg-color--light:  #8bb0d3;
+  --md-primary-fg-color--dark:   #466aaf;
+  --md-accent-fg-color:          #5588dd;
+  --md-typeset-a-color:          #8bb0d3;   /* Lighter links for dark mode */
+  
+  /* Dark mode code blocks */
+  --md-code-bg-color:            #2d2d2d;   /* Darker background */
+  --md-code-fg-color:            #d4d4d4;   /* Light text */
+}
+
+/* Hover states matching omegaUp brand */
+.md-typeset a:hover {
+  color: #466aaf;  /* Darker blue on hover */
+}
+
+[data-md-color-scheme="slate"] .md-typeset a:hover {
+  color: #8bb0d3;  /* Lighter blue on hover in dark mode */
+}
+
+/* Button colors matching omegaUp */
+.md-typeset .md-button--primary {
+  background-color: #678dd7;
+  border-color: #678dd7;
+}
+
+.md-typeset .md-button--primary:hover {
+  background-color: #466aaf;
+  border-color: #466aaf;
+}
+
+/* Admonition colors using omegaUp palette */
+.md-typeset .admonition.success {
+  border-color: #35b835;  /* omegaUp green */
+}
+
+.md-typeset .admonition.warning {
+  border-color: #c09853;  /* --status-warning-color */
+}
+
+.md-typeset .admonition.danger {
+  border-color: #b94a48;  /* --status-error-color */
+}
+
+/* Fix logo rendering on homepage - prevent cropping */
+.md-typeset img[alt*="omegaUp Logo"],
+.md-typeset img[src*="omegaup.svg"],
+.md-typeset img[src*="omegaup.png"] {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* Hide site name from navbar - only show logo */
+.md-header__title {
+  /* Keep this element as a flex spacer so header items stay right-aligned */
+  flex: 1 1 auto;
+}
+
+/* Hide the actual title text (site name + page title) */
+.md-header__title .md-header__ellipsis {
+  display: none !important;
+}
+
+/* Move search bar to the right side of header */
+/* The flex spacer above does the positioning; keep this empty on purpose. */
